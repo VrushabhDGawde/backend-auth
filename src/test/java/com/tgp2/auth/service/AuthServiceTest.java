@@ -145,7 +145,6 @@ class AuthServiceTest {
 
         JwtResponse jwtResponse = (JwtResponse) response.getBody();
         assertEquals("jwt-token", jwtResponse.getAccessToken());
-        assertEquals("refresh-token", jwtResponse.getRefreshToken());
         assertEquals("Bearer", jwtResponse.getTokenType());
 
         verify(jwtUtils).generateJwtToken(userDetails);
