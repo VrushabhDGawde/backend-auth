@@ -18,6 +18,7 @@ public class UserDetailsImpl implements UserDetails {
     private String username; // optional
     private String email;
     private String password;
+    private String role;
     private User user; // reference to actual User entity
 
     public static UserDetailsImpl build(User user) {
@@ -26,6 +27,7 @@ public class UserDetailsImpl implements UserDetails {
         u.setUsername(user.getUsername());
         u.setEmail(user.getEmail());
         u.setPassword(user.getPassword());
+        u.setRole(user.getRole());
         u.setUser(user);
         return u;
     }
@@ -44,7 +46,7 @@ public class UserDetailsImpl implements UserDetails {
         // We treat email as the principal for authentication flows; but keep username field available.
         return email;
     }
-
+    public String getRole() { return role; }
     @Override
     public boolean isAccountNonExpired() { return true; }
 
