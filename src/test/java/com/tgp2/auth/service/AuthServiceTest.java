@@ -40,7 +40,7 @@ class AuthServiceTest {
     @Test
     void registerUser_Success() {
         // Arrange
-        SignupRequest request = new SignupRequest("testuser", "test@example.com", "password123");
+        SignupRequest request = new SignupRequest("testuser", "test@example.com", "password123","Student");
 
         when(userRepository.existsByEmail("test@example.com")).thenReturn(false);
         when(userRepository.existsByUsername("testuser")).thenReturn(false);
@@ -58,7 +58,7 @@ class AuthServiceTest {
     @Test
     void registerUser_EmailAlreadyExists() {
         // Arrange
-        SignupRequest request = new SignupRequest("testuser", "test@example.com", "password123");
+        SignupRequest request = new SignupRequest("testuser", "test@example.com", "password123","Student");
 
         when(userRepository.existsByEmail("test@example.com")).thenReturn(true);
 
@@ -73,7 +73,7 @@ class AuthServiceTest {
     @Test
     void registerUser_UsernameAlreadyExists() {
         // Arrange
-        SignupRequest request = new SignupRequest("testuser", "test@example.com", "password123");
+        SignupRequest request = new SignupRequest("testuser", "test@example.com", "password123","Student");
 
         when(userRepository.existsByEmail("test@example.com")).thenReturn(false);
         when(userRepository.existsByUsername("testuser")).thenReturn(true);
@@ -89,7 +89,7 @@ class AuthServiceTest {
     @Test
     void registerUser_PasswordIsEncoded() {
         // Arrange
-        SignupRequest request = new SignupRequest("testuser", "test@example.com", "password123");
+        SignupRequest request = new SignupRequest("testuser", "test@example.com", "password123","Student");
 
         when(userRepository.existsByEmail("test@example.com")).thenReturn(false);
         when(userRepository.existsByUsername("testuser")).thenReturn(false);
@@ -119,7 +119,7 @@ class AuthServiceTest {
         LoginRequest loginRequest = new LoginRequest("test@example.com", "password123");
 
         UserDetailsImpl userDetails =
-                new UserDetailsImpl(1L, "testuser", "test@example.com", "encodedPass", null);
+                new UserDetailsImpl(1L, "testuser", "test@example.com", "encodedPass", "Student", null);
 
         Authentication authentication = mock(Authentication.class);
 
@@ -176,7 +176,7 @@ class AuthServiceTest {
         // Arrange
         LoginRequest loginRequest = new LoginRequest("test@example.com", "password123");
 
-        UserDetailsImpl userDetails = new UserDetailsImpl(1L, "testuser", "test@example.com", "encodedPass", null);
+        UserDetailsImpl userDetails = new UserDetailsImpl(1L, "testuser", "test@example.com", "encodedPass","Student" ,null);
         Authentication authentication = mock(Authentication.class);
 
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
@@ -275,7 +275,7 @@ class AuthServiceTest {
         user.setEmail("test@example.com");
 
         UserDetailsImpl userDetails = new UserDetailsImpl(
-                1L, "testuser", "test@example.com", "encodedPass", null
+                1L, "testuser", "test@example.com", "encodedPass", "Student",null
         );
         userDetails.setUser(user); // assuming you added this to your UserDetailsImpl
 
