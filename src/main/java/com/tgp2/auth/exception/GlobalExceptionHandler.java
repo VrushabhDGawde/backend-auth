@@ -24,4 +24,9 @@ public class GlobalExceptionHandler {
                 HttpStatus.FORBIDDEN
         );
     }
+
+    @ExceptionHandler(DuplicateResponseException.class)
+    public ResponseEntity<String> handleDuplicateResponse(DuplicateResponseException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
 }
